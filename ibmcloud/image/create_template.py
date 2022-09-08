@@ -9,6 +9,7 @@ import time
 import signal
 import argparse
 import getpass
+from threading import Thread
 from pathlib import Path
 from shutil import which
 from pyVim import connect
@@ -272,6 +273,21 @@ def get_ovf_descriptor(ovf_path):
                 print("Could not read file: %s" % ovf_path)
                 exit(1)
 
+def keep_lease_alive(lease):
+    """
+    Keeps the lease alive while POSTing the VMDK.
+    """
+    while True:
+        sleep(5)
+        try:
+            # Choosing arbitrary percentage to keep the lease alive.
+            lease.HttpNfcLeaseProgress(50)
+            if lease.state == vim.HttpNfcLease.State.done:
+                return
+            # If the lease is released, we get an exception.
+            # Returning to kill the thread.
+        except Exception:
+            return
     
 def createuploadtemplate(args, ovf, vmdkfile):
     si = connect.SmartConnectNoSSL(host=args.host, port=443, user=args.user, pwd=args.password)
