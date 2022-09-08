@@ -332,7 +332,7 @@ def createuploadtemplate(args, ovf, vmdkfile):
                 curl_cmd = (
                     "curl -Ss -X POST --insecure -T %s -H 'Content-Type: \
                     application/x-vnd.vmware-streamVmdk' %s" %
-                    (args.vmdk_path, url))
+                    (vmdkfile, url))
                 system(curl_cmd)
                 lease.HttpNfcLeaseComplete()
                 keepalive_thread.join()
