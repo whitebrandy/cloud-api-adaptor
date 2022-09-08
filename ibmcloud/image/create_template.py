@@ -192,8 +192,7 @@ def imagetovmdk(url):
     return None
 
 def createovf(vmdkfile, name):
-    vmdk_info = json.loads(os.popen(f"qemu-img info {vmdkfile} --output json").read())    
-    name=Path(vmdkfile).stem
+    vmdk_info = json.loads(os.popen(f"qemu-img info {vmdkfile} --output json").read()) 
     ovfpath=name + ".ovf"
     virtual_size = vmdk_info['virtual-size']
     actual_size = vmdk_info['actual-size']
