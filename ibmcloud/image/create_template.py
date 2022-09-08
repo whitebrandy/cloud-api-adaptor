@@ -9,6 +9,8 @@ import time
 import signal
 import argparse
 import getpass
+from time import sleep
+from os import system
 from threading import Thread
 from pathlib import Path
 from shutil import which
