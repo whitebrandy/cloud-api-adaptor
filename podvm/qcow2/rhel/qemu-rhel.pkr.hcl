@@ -61,7 +61,7 @@ build {
   }
 
   provisioner "file" {
-    source      = "rhel/selinux_relabel.sh"
+    source      = "selinux_relabel.sh"
     destination = "~/selinux_relabel.sh"
   }
 
