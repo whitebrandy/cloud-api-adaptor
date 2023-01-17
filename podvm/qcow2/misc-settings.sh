@@ -10,10 +10,13 @@
 
 # This ensures machine-id is generated during first boot and a unique
 # dhcp IP is assigned to the VM
+set -x
 sudo echo -n > /etc/machine-id
 #Lock password for the ssh user (peerpod) to disallow logins
 sudo passwd -l peerpod
 
+echo "CLOUD_PROVIDER is $CLOUD_PROVIDER"
+echo "PODVM_DISTRO is $PODVM_DISTRO"
 # install required packages
 if [ "$CLOUD_PROVIDER" == "vsphere" ]
 then
