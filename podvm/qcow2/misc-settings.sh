@@ -19,10 +19,12 @@ if [ "$CLOUD_PROVIDER" == "vsphere" ]
 then
 # Add vsphere specific commands to execute on remote
     case $PODVM_DISTRO in
-	centos)
+	rhel)
+	    [ ! -z "${RHEL_SUBSCRIPTION}" ] && eval "${RHEL_SUBSCRIPTION}" || \
+		    echo "RHEL_SUBSCRIPTION not defined, template generation may fail!"
 	    #fallthrough
 	    ;&
-	rhel)
+	centos)
 	    (! dnf list --installed | grep open-vm-tools 2>&1 >/dev/null) && \
 		(! dnf -y install open-vm-tools) && \
 		     echo "$PODVM_DISTRO: Error installing package required for cloud provider: $CLOUD_PROVIDER" 1>&2 && exit 1

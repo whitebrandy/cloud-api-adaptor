@@ -59,6 +59,7 @@ build {
     environment_vars = [
         "CLOUD_PROVIDER=${var.cloud_provider}",
         "PODVM_DISTRO=${var.podvm_distro}",
+        "RHEL_SUBSCRIPTION=${var.rhel_subscription}",
 	]
     inline = [
       "sudo -E bash ~/misc-settings.sh"
