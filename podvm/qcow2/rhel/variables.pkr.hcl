@@ -57,3 +57,8 @@ variable "cloud_provider" {
   type    = string
   default = env("CLOUD_PROVIDER")
 }
+
+variable "rhel_subscription" {
+  type    = string
+  default = env("RHEL_SUBSCRIPTION")
+}

@@ -13,16 +13,18 @@
 sudo echo -n > /etc/machine-id
 #Lock password for the ssh user (peerpod) to disallow logins
 sudo passwd -l peerpod
-
+set -x
 # install required packages
 if [ "$CLOUD_PROVIDER" == "vsphere" ]
 then
 # Add vsphere specific commands to execute on remote
     case $PODVM_DISTRO in
-	centos)
-	    #fallthrough
-	    ;&
 	rhel)
+	    eval "${RHEL_SUBSCRIPTION}" || \
+			echo "RHEL_SUBSCRIPTION not defined, template generation may fail!"
+	    #fallthrough
+	    ;&	
+	centos)	    
 	    (! dnf list --installed | grep open-vm-tools 2>&1 >/dev/null) && \
 		(! dnf -y install open-vm-tools) && \
 		     echo "$PODVM_DISTRO: Error installing package required for cloud provider: $CLOUD_PROVIDER" 1>&2 && exit 1
