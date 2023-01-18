@@ -37,17 +37,17 @@ build {
     ]
   }
 
-  provisioner "file" {
-    source      = "qcow2/copy-files.sh"
-    destination = "~/copy-files.sh"
-  }
-
-  provisioner "shell" {
-    remote_folder = "~"
-    inline = [
-      "sudo bash ~/copy-files.sh"
-    ]
-  }
+#  provisioner "file" {
+#    source      = "qcow2/copy-files.sh"
+#    destination = "~/copy-files.sh"
+#  }
+#
+#  provisioner "shell" {
+#    remote_folder = "~"
+#    inline = [
+#      "sudo bash ~/copy-files.sh"
+#    ]
+#  }
 
   provisioner "file" {
     source      = "qcow2/misc-settings.sh"
@@ -59,6 +59,7 @@ build {
     environment_vars = [
         "CLOUD_PROVIDER=${var.cloud_provider}",
         "PODVM_DISTRO=${var.podvm_distro}",
+        "RHEL_SUBSCRIPTION=${var.rhel_subscription}",		
 	]
     inline = [
       "sudo -E bash ~/misc-settings.sh"
