@@ -27,7 +27,7 @@ then
 		(! dnf -y install open-vm-tools) && \
 		     echo "$PODVM_DISTRO: Error installing package required for cloud provider: $CLOUD_PROVIDER" 1>&2 && exit 1
 	    # RHEL does not enable the service when installing
-	    systemctl enable vmtoolsd
+	    setenforce 0 && systemctl enable vmtoolsd && setenforce 1
 	    ;;
 	ubuntu)
 	    (! dpkg -l | grep open-vm-tools 2>&1 > /dev/null) && apt-get update && \

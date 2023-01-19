@@ -61,7 +61,7 @@ else
 	$(error PODVM_DISTRO is invalid or not defined)
 endif
 
-$(IMAGE_FILE): $(BINARIES) $(FILES) setopts
+$(IMAGE_FILE): setopts
 	rm -fr output
 	rm -f cloud-init.img
 	cloud-localds cloud-init.img qcow2/userdata.cfg

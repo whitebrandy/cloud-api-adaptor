@@ -38,18 +38,6 @@ build {
   }
 
   provisioner "file" {
-    source      = "qcow2/copy-files.sh"
-    destination = "~/copy-files.sh"
-  }
-
-  provisioner "shell" {
-    remote_folder = "~"
-    inline = [
-      "sudo bash ~/copy-files.sh"
-    ]
-  }
-
-  provisioner "file" {
     source      = "qcow2/misc-settings.sh"
     destination = "~/misc-settings.sh"
   }
